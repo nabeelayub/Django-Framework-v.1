@@ -1,0 +1,41 @@
+{% extends 'registration/base.html' %}
+{% block body %}
+<h1>User's Profile</h1>
+
+
+    {% csrf_token %}
+     <div class="top-content">
+       <div class="inner-bg">
+         <div class="container">
+             <div class="col-sm-3"></div>
+              <div class="col-sm-1"></div>
+                  <div class="col-sm-4">
+                      <div class="form-box">
+                          <div class="form-bottom">
+                              <div class="col-sm-10">
+                                  {% csrf_token %}
+                                  {% if user.images.url %}
+                               <img src="{{ user.images.url }}" class="avatar img-circle img-thumbnail" alt="avatar">
+                                  {% endif %}
+                            </div>
+                               {% if messages %}
+                              <ul>
+                                  {% for message in messages %}
+                                  <li>{{ message }}</li>
+                                  {% endfor %}
+                              </ul>
+                              {% endif %}
+                         <form method="post" enctype="multipart/form-data">
+                             {% csrf_token %}
+                             {% include 'registration/form_template.html' %}
+                        <button type="submit" style="margin:10px" class="btn">Edit</button>
+                         </form>
+                              </div>
+                  </div>
+                  </div>
+             </div>
+         </div>
+       </div>
+
+
+{% endblock %}

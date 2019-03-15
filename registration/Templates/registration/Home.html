@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+{% csrf_token %}
+<h1>Welcome to Home Page</h1>
+
+{% for ass in backends.associated %}
+{% if ass.provider == 'linkedin-oauth2' %}
+            <div class="col-md-6 text-center">
+                <img src="{{ass.extra_data.picture_url}}" alt="" width="150" height="150" style="border-radius: 50%">
+            </div>
+            <div class="col-md-6 social-container my-2">                 <p> Signed in via:  Linkedin </p>
+                <p> Name:  {{ ass.extra_data.name }} </p>
+                <p> Provider url: <a href="{{ass.extra_data.profile_url}}">link</a></p>
+            </div>
+          {% endif %}
+{% endfor %}
+<h2>{{ user.username }}</h2>
+<a href="{% url 'edit_view' user.id %}">Edit Profile</a>
+<a href="{% url 'user_logout' %}?next={% url 'login' %}">Logout</a>
+</body>
+</html>

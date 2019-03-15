@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Profile</title>
+</head>
+<body>
+          {% csrf_token %}
+                 <h1>{{ user.username }}</h1>
+                 <h2>{{ user.profile.age }}</h2>
+                 <img src="{{ user.profile.images.url }}" width="240"/>
+                 <a href="{% url 'edit_view' user.profile.id %}" class="btn btn-primary" role="button">Edit</a>
+
+
+</body>
+</html>
